@@ -1,3 +1,4 @@
+
 import {
   BrowserRouter,
   Routes,
@@ -6,38 +7,33 @@ import {
 } from "react-router-dom";
 
 import { AuthProvider } from "./context/AuthContext";
-import LoginPage from "./pages/LoginPage";
 import CalendarPage from "./pages/CalendarPage";
-import ProtectedRoute from "./components/auth/ProtectedRoute";
 
 function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-
         <Routes>
-
           <Route
             path="/"
-            element={<Navigate to="/login" replace />}
+            element={<CalendarPage />}
+          />
+
+          <Route
+            path="/calendar"
+            element={<CalendarPage />}
           />
 
           <Route
             path="/login"
-            element={<LoginPage />}
+            element={<Navigate to="/" replace />}
           />
 
           <Route
-  path="/calendar"
-  element={
-    <ProtectedRoute>
-      <CalendarPage />
-    </ProtectedRoute>
-  }
-/>
-
+            path="*"
+            element={<Navigate to="/" replace />}
+          />
         </Routes>
-
       </AuthProvider>
     </BrowserRouter>
   );
